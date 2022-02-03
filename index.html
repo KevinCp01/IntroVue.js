@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Probando Vue.js</h1>
+    <br>
+    <div id="app">
+
+        <h3>Subject: {{subject}}</h3>
+        <h3>Group: {{group}}</h3>
+        <h3>Proffesor: {{professor}}</h3>
+        
+        <h3>Topics:</h3>
+       <ul>
+           <li v-for="topic in topics">
+               {{topic}}
+           </li>
+       </ul>
+
+        <h3>Tools:</h3>
+        <ul>
+            <li v-for="tool in tools">
+                {{tool.name}} {{tool.version}} 
+            </li>
+        </ul>
+
+        <span>Add Tool: </span>
+        <input type="text" v-model="newTool" @keyop.enter="addTool">
+        <Button @click="addTool">Add</Button>
+
+    </div>
+    
+    
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+       
+        const app = Vue.createApp({
+
+            data: () =>({
+                subject: "Aplicaciones Web Progresivas",
+                group: "IDGS101N",
+                professor: "Roberto Luna",
+                topics: ['What is PWA?','Continuos Development.','Continuos Integration.','Introduction Git.','Introduction GitHub.'],
+                tools: [
+                    {name: "Git", version:"1.0.2"},
+                    {name: "MySQL", version: "1.12.3"},
+                    {name: "Visual Studio Code", version:"2.5.3"}
+                ],
+                newTool:""
+
+            }),
+            methods:{
+                addTool(){
+                    this.tools.push(
+                        {name: this.newTool ,version:"1.0"}
+                    )
+                    this.newTool = ""
+                }
+            }
+           
+        })
+
+        const vm = app.mount('#app')
+
+    </script>
+
+</body>
+</html>
